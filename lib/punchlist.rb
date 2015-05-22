@@ -13,11 +13,11 @@ module Punchlist
     end
 
     def run
-      if @args[0] == '--glob'
-        @source_files_glob = @args[1]
+      if @args[0] == '--files'
+        @source_files_args= @args[1]
       elsif @args[0]
-        @outputter.puts "USAGE: punchlist\n"
-        return 0 # FIXME: need to vary return based on good or bad arguments
+        @outputter.puts "USAGE: punchlist [--files specific_files_list] \n"
+        return 0
       end
 
       analyze_files
@@ -25,8 +25,8 @@ module Punchlist
       0
     end
 
-    def source_files_glob
-      @source_files_glob ||=
+    def source_files_args
+      @source_files_args ||=
         '{app,lib,test,spec,feature}/**/*.{rb,swift,scala,js,cpp,c,java,py}'
     end
 
@@ -39,7 +39,7 @@ module Punchlist
     end
 
     def source_files
-      @globber.glob(source_files_glob)
+      @globber.glob(source_files_args)
     end
 
     def punchlist_line_regexp
