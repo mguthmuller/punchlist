@@ -1,8 +1,6 @@
-# XXX: need to include BUG in list
-# XXX: need to include BUG in my rubocop config
-# BUG need to fix the fact that we create blank lines on files with no issues
+# FIXME: need to fix the fact that we create blank lines on files with no issues
 module Punchlist
-  # Counts the number of 'todo' comments in your code.
+  # Counts the number of 'TODO' and 'FIXME' comments in your code.
   class Punchlist
     def initialize(args,
                    outputter: STDOUT,
@@ -19,7 +17,7 @@ module Punchlist
         @source_files_glob = @args[1]
       elsif @args[0]
         @outputter.puts "USAGE: punchlist\n"
-        return 0 # XXX: need to vary return based on good or bad arguments
+        return 0 # FIXME: need to vary return based on good or bad arguments
       end
 
       analyze_files
@@ -45,7 +43,7 @@ module Punchlist
     end
 
     def punchlist_line_regexp
-      /XXX|TODO/
+      /TODO|FIXME/
     end
 
     def look_for_punchlist_items(filename)
