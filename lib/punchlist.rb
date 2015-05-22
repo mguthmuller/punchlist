@@ -42,17 +42,13 @@ module Punchlist
       @globber.glob(source_files_args)
     end
 
-    def punchlist_line_regexp
-      /TODO|FIXME/
-    end
-
     def look_for_punchlist_items(filename)
       lines = []
       line_num = 0
       @file_opener.open(filename, 'r') do |file|
         file.each_line do |line|
           line_num += 1
-          lines << [filename, line_num, line] if line =~ punchlist_line_regexp
+          lines << [filename, line_num, line] if line =~ /TODO|FIXME/i
         end
       end
       lines
